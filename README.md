@@ -6,6 +6,8 @@ Disaster Reporting Network: make interactive earthquake maps
 
 ### Background
 ### Purpose
+The purpose of this project is to create an interactive map that visualizes the maginitudes and locations of global earthquakes over theh past 7 days.
+
 ### Deliverables
 ### Resources
  - Data Sources: hawaii.sqlite
