@@ -4,7 +4,7 @@ console.log("working");
 /* ADD MAP OBJECT with setView() method:
 CreateS the map object with a (center [lat,lng] and zoom level).
 'mapid' references the id tag in html file */
-let map = L.map('mapid').setView([34.0522, -118.2437], 4);
+let map = L.map('mapid').setView([34.0522, -100.2437], 4);
 
 // Get data from cities.js
 let cityData = cities;
