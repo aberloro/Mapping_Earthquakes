@@ -4,20 +4,38 @@ console.log("working");
 /* ADD MAP OBJECT with setView() method:
 CreateS the map object with a (center [lat,lng] and zoom level).
 'mapid' references the id tag in html file */
-let map = L.map('mapid').setView([34.0522, -100.2437], 4);
+let map = L.map('mapid').setView([37.5, -122.5], 10);
 
-// Get data from cities.js
-let cityData = cities;
+// Add GeoJSON data.
+let sanFranAirport =
+{"type":"FeatureCollection","features":[{
+    "type":"Feature",
+    "properties":{
+        "id":"3469",
+        "name":"San Francisco International Airport",
+        "city":"San Francisco",
+        "country":"United States",
+        "faa":"SFO",
+        "icao":"KSFO",
+        "alt":"13",
+        "tz-offset":"-8",
+        "dst":"A",
+        "tz":"America/Los_Angeles"},
+        "geometry":{
+            "type":"Point",
+            "coordinates":[-122.375,37.61899948120117]}}
+]};
 
-// Loop through the cities array and create one marker for each city.
-cityData.forEach(function(city) {
-  console.log(city)
-  L.circleMarker(city.location, {
-    radius: city.population/100000
-  })
-  .bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
-.addTo(map);
-});
+
+// Grabbing our GeoJSON data.
+L.geoJSON(sanFranAirport, {
+  // We turn each feature into a marker on the map.
+  onEachFeature: function(feature, layer) {
+    console.log(layer);
+    layer.bindPopup("<h2>" + `code: ` + feature.properties.faa + ` <br> name: ` + feature.properties.name + "</h2>");
+  }
+
+}).addTo(map);
 
 /*Use Mapbox styles api for "static tiles api" to
 We create the tile layer that will be the background of our map.*/
