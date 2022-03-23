@@ -1,6 +1,9 @@
 // Add console.log to check to see if our code is working.
 console.log("working");
 
+
+////////// BASE AND OVERLAY LAYERS //////////////////
+
 /*Use Mapbox styles api for "static tiles api" to
 We create the streets view tile layer that will be the background of our map.*/
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -9,7 +12,7 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
     accessToken: API_KEY
 });
 
-// We create the dark view tile layer that will be an option for our map.
+// We create the satellite view tile layer that will be an option for our map.
 let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -32,6 +35,8 @@ let overlays = {
 };
 
 
+///////////// MAP OBJECT AND LAYER CONTROL //////////////////////
+
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
   center: [39.5, -98.5],
@@ -42,6 +47,9 @@ let map = L.map('mapid', {
 /* Pass our map layers into our layers control and 
 add the layers control to the map. */
 L.control.layers(baseMaps, overlays).addTo(map);
+
+
+////////////////// CUSTOMIZED POP UP LAYER //////////////////////////
 
 // Grabbing our GeoJSON data and adding pop ups.
 let quakeDataURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
@@ -89,10 +97,8 @@ d3.json(quakeDataURL).then(function(data) {
       console.log(data);
       return L.circleMarker(latlng);
     },
-    
-    // We set the style for each circleMarker using our styleInfo function.
+        // We set the style for each circleMarker using our styleInfo function.
     style: styleInfo,
-
     // create popup
     onEachFeature: function(feature, layer) {
       layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
@@ -103,22 +109,25 @@ d3.json(quakeDataURL).then(function(data) {
   earthquakes.addTo(map);
 });
 
+//////////////////// MAP LEGEND /////////////////////
 
 // Create a legend control object.
-let legend = L.control({position: 'bottomright'});
+let legend = L.control({
+  position: 'bottomright'
+});
 
 legend.onAdd = function () {
 
-    let div = L.DomUtil.create('div', 'info legend');
-      const magnitudes = [0, 1, 2, 3, 4, 5];
-      const colors = [
-        "#98ee00",
-        "#d4ee00",
-        "#eecc00",
-        "#ee9c00",
-        "#ea822c",
-        "#ea2c2c"
-      ];
+  let div = L.DomUtil.create('div', 'info legend');
+    const magnitudes = [0, 1, 2, 3, 4, 5];
+    const colors = [
+      "#98ee00",
+      "#d4ee00",
+      "#eecc00",
+      "#ee9c00",
+      "#ea822c",
+      "#ea2c2c"
+    ];
 
     // loop through our intervals and generate a label with a colored square for each interval
     for (let i = 0; i < magnitudes.length; i++) {
