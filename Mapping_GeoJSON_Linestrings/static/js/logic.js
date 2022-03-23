@@ -18,8 +18,8 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 
 // Create a base layer that holds streets and dark maps.
 let baseMaps = {
-  Light: light,
-  Dark: dark
+  "Day Navigation": light,
+  "Night Navigation": dark
 };
 
 // Create the map object with center, zoom level and default layer.
@@ -37,21 +37,21 @@ let torontoData = "https://raw.githubusercontent.com/aberloro/Mapping_Earthquake
 
 // Create a style for the lines.
 let myStyle = {
-  color: "#ffffa1",
-  weight: 2
+  color: "deepPink",
+  weight: 1
 }
 
 // Grabbing our GeoJSON data and adding pop ups.
 d3.json(torontoData).then(function(data) {
   console.log(data);
-// Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data, {
-  style: myStyle,
-  onEachFeature:function(feature,layer) {
-    layer.bindPopup("<h3> Airline: " + feature.properties.airline + "</h3> <hr> <h3> Destination " + feature.properties.dst + "</h3>");
-  }
-})
-.addTo(map);
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJson(data, {
+    style: myStyle,
+    onEachFeature:function(feature,layer) {
+      layer.bindPopup("<h3> Airline: " + feature.properties.airline + "</h3> <hr> <h3> Destination " + feature.properties.dst + "</h3>");
+    }
+  })
+  .addTo(map);
 });
 
 
