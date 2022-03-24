@@ -20,6 +20,8 @@ The purpose of this project is to expand on the map created in Phase1 to include
  - Technology: JavaScript, Leaflet library, D3 library, GeoJSON, mapbox
 
 ## Final Product
+![ScreenGrab](https://user-images.githubusercontent.com/93740725/159823635-8e8de63b-eaa0-4753-90a8-7a7b47487a3d.png)
+
 
 
 
