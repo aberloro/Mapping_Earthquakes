@@ -21,8 +21,5 @@ The purpose of this project is to expand on the map created in Phase1 to include
 
 ## Final Product
 
-link to interactive [map]()
-
-
 
 
