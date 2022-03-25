@@ -132,10 +132,19 @@ legend.onAdd = function () {
     // loop through our intervals and generate a label with a colored square for each interval
     for (let i = 0; i < magnitudes.length; i++) {
       console.log(colors[i]);
+      //if(magnitudes[i+1]){
+      //  div.innerHTML += '&ndash;' + magnitudes[i + 1] + '<br>'
+      //} else {
+      //  div.innerHTML += "+"
+     // }
       div.innerHTML +=
           '<i style="background:' + colors[i] + '"></i> ' +
           magnitudes[i] + (magnitudes[i + 1] ? '&ndash;' + magnitudes[i + 1] + '<br>' : '+');
-    }
+                          // True ? "A" : "+"
+                          
+    }                      // tenary operator  (condition) ? "A" : "B"
+
+
     return div;
 };
 
